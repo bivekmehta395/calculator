@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Advanced Calculator</title>
+</head>
+<body>
+  <div class="calculator">
+    <div class="display" id="display">0</div>
+    <div class="buttons">
+      <button onclick="clearDisplay()">C</button>
+      <button onclick="deleteDigit()">DEL</button>
+      <button>%</button>
+      <button onclick="appendOperator('/')">÷</button>
+      <button onclick="appendDigit('7')">7</button>
+      <button onclick="appendDigit('8')">8</button>
+      <button onclick="appendDigit('9')">9</button>
+      <button onclick="appendOperator('*')">×</button>
+      <button onclick="appendDigit('4')">4</button>
+      <button onclick="appendDigit('5')">5</button>
+      <button onclick="appendDigit('6')">6</button>
+      <button onclick="appendOperator('-')">−</button>
+      <button onclick="appendDigit('1')">1</button>
+      <button onclick="appendDigit('2')">2</button>
+      <button onclick="appendDigit('3')">3</button>
+      <button onclick="appendOperator('+')">+</button>
+      <button class="span-two" onclick="appendDigit('0')">0</button>
+      <button onclick="appendDigit('.')">.</button>
+      <button onclick="calculate()">=</button>
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById("display");
+
+    function appendDigit(digit) {
+      if (display.innerText === "0" && digit !== ".") {
+        display.innerText = digit;
+      } else {
+        display.innerText += digit;
+      }
+    }
+
+    function appendOperator(operator) {
+      const current = display.innerText;
+      if (!current.endsWith("+") && !current.endsWith("-") && 
+          !current.endsWith("*") && !current.endsWith("/")) {
+        display.innerText += operator;
+      }
+    }
+
+    function clearDisplay() {
+      display.innerText = "0";
+    }
+
+    function deleteDigit() {
+      display.innerText = display.innerText.slice(0, -1) || "0";
+    }
+
+    function calculate() {
+      try {
+        display.innerText = eval(display.innerText);
+      } catch (error) {
+        display.innerText = "Error";
+      }
+    }
+  </script>
+</body>
+</html>
